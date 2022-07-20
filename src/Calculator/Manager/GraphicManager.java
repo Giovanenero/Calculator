@@ -36,8 +36,7 @@ public class GraphicManager {
         window.setVisible(true);
     }
 
-    public void newButtons(){
-
+    private void newButtons(){
         short space = 0;
 
         Button b1 = new Button("/", new Math(160 + space * 4, 150 + space), false, false);
@@ -54,7 +53,6 @@ public class GraphicManager {
 
         Button b5 = new Button("=", new Math(160 + space * 4, 150 + b1.getSize().y * 4 + space), false, true);
         buttons.add(b5);
-
 
         Button b6 = new Button("%", new Math(160 - b1.getSize().x * 1 + space * 3, 150 + b1.getSize().y * 0 + space), false, false);
         buttons.add(b6);
