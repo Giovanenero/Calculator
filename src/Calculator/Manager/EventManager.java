@@ -31,6 +31,7 @@ public class EventManager implements ActionListener {
         // "C"
         if(event.getActionCommand().equals(buttons.get(0).getContent())){
             expression = "";
+            quantity_par = 0;
         }
         // 7
         else if(event.getActionCommand().equals(buttons.get(1).getContent())){
@@ -66,7 +67,9 @@ public class EventManager implements ActionListener {
                     quantity_par--;
                 }
             } else {
-                System.out.println("ERROR: entry invalidates");
+                expression = expression + "(";
+                quantity_par++;
+                //System.out.println("ERROR: entry invalidates");
             }
         }
         //8

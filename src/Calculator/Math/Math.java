@@ -14,39 +14,80 @@ public class Math {
 
     }
 
-    public String result(String expression){
-        /*
+    private String Calc(String expression){
         if (expression.contains("+")) {
-            expression = Float.toString(Sum(expression));
+            return Float.toString(Sum(expression));
         } else if (expression.contains("-")) {
-            expression = Float.toString(Subtraction(expression));
+            return Float.toString(Subtraction(expression));
         } else if (expression.contains("x")) {
-            expression = Float.toString(Multiplication(expression));
+            return Float.toString(Multiplication(expression));
         } else if (expression.contains("/")) {
             float aux = Division(expression);
             if (aux == 0) {
                 return "";
             } else {
-                expression = Float.toString(aux);
+                return Float.toString(aux);
             }
-        } else if (expression.contains("%")) {
-            expression = Float.toString(Percentage(expression));
+        } else {
+            return Float.toString(Percentage(expression));
         }
+    }
+    private String removePoint(String expression){
         int pos = expression.length();
         if (expression.charAt(pos - 2) == '.' && expression.charAt(pos - 1) == '0') {
             return expression.substring(0, pos - 2);
         }
         return expression;
+    }
+    public String result(String expression){
+        /*
+        expression = removePoint(Calc(expression));
         */
         if(!expression.contains("(")){
             //terminar...
         } else {
-            int pos_par = expression.indexOf("(");
-            //terminar...
+            return returnNumber(expression, expression.indexOf("("));
         }
+        return expression;
+    }
 
-
-
+    private String returnNumber(String expression, int pos_ini){
+        String aux;
+        if(expression.charAt(pos_ini + 1) == '('){
+            aux = returnNumber(expression, pos_ini + 1);
+        } else {
+            String aux2 = "";
+            if(expression.indexOf("(", pos_ini + 1) == -1){
+                if(pos_ini == 0){
+                    return removePoint(Calc(expression.substring(pos_ini + 1, expression.lastIndexOf(")"))));
+                } else {
+                    aux = expression.substring(expression.indexOf(")") + 1);
+                    for(int i = 0; i < pos_ini; i++){
+                        aux2 += "(";
+                    }
+                    return aux2 + removePoint(Calc(expression.substring(pos_ini + 1, expression.indexOf(")")))) + aux;
+                }
+            } else {
+                int pos = expression.indexOf("(", pos_ini + 1);
+                int cont1 = pos_ini;
+                int cont2 = pos_ini;
+                if(pos_ini != )
+                for(int i = 0; i <= cont1; i++){
+                    aux2 += "(";
+                }
+                String aux3 = "";
+                for(int i = 0; i <= cont2; i++){
+                    aux3 += ")";
+                }
+                aux = aux2 + expression.substring(pos_ini, pos) + returnNumber(expression.substring(pos), 0) + aux3;
+                System.out.println(aux);
+            }
+        }
+        //System.out.println(aux);
+        if(aux.contains("(")){
+            return returnNumber(aux, 0);
+        }
+        return aux;
     }
 
     public boolean canAdd(String expression){
@@ -68,7 +109,7 @@ public class Math {
         float num2 = returnNumber(expression, pos1 + 1, expression.length());
         return num1 + num2;
     }
-    private  float Subtraction(String expression){
+    private float Subtraction(String expression){
         int pos1 = expression.indexOf('-');
         float num1 = returnNumber(expression, 0, pos1);
         float num2 = returnNumber(expression, pos1 + 1, expression.length());
