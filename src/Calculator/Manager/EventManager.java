@@ -6,19 +6,17 @@ import Calculator.Math.Math;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 //Singleton
 public class EventManager implements ActionListener {
 
     private static EventManager eventManager;
-    //private static JFrame window = GraphicManager.getWindow();
     private static List<Button> buttons;
     private static JFrame window = GraphicManager.getWindow();
     private String expression = "";
     private Math math = new Math();
+    private int quantity_par = 0;
 
     private EventManager(){
         buttons = GraphicManager.getButtons();
@@ -56,12 +54,18 @@ public class EventManager implements ActionListener {
         }
         // ()
         else if(event.getActionCommand().equals(buttons.get(5).getContent())){
-            if(expression.contains("(") && !expression.contains(")")){
-                expression = expression + ")";
-            } else if(!expression.contains(")")){
+            if (quantity_par == 0) {
+                if (!expression.isEmpty()) {
+                    expression = expression + "x";
+                }
                 expression = expression + "(";
+                quantity_par++;
+            } else if (expression.charAt(expression.length() - 1) == '(') {
+                expression = expression + "(";
+                quantity_par++;
             } else {
-                //terminar...
+                expression = expression + ")";
+                quantity_par--;
             }
         }
         //8
