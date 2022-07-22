@@ -15,7 +15,7 @@ public class Math {
     }
 
     public String result(String expression){
-        String exp;
+        /*
         if (expression.contains("+")) {
             expression = Float.toString(Sum(expression));
         } else if (expression.contains("-")) {
@@ -24,21 +24,29 @@ public class Math {
             expression = Float.toString(Multiplication(expression));
         } else if (expression.contains("/")) {
             float aux = Division(expression);
-            if(aux == 0){
+            if (aux == 0) {
                 return "";
             } else {
                 expression = Float.toString(aux);
             }
-        } else if(expression.contains("%")) {
+        } else if (expression.contains("%")) {
             expression = Float.toString(Percentage(expression));
-        } else {
-            //terminar...
         }
         int pos = expression.length();
-        if(expression.charAt(pos - 2) == '.' && expression.charAt(pos - 1) == '0'){
+        if (expression.charAt(pos - 2) == '.' && expression.charAt(pos - 1) == '0') {
             return expression.substring(0, pos - 2);
         }
         return expression;
+        */
+        if(!expression.contains("(")){
+            //terminar...
+        } else {
+            int pos_par = expression.indexOf("(");
+            //terminar...
+        }
+
+
+
     }
 
     public boolean canAdd(String expression){

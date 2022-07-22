@@ -53,19 +53,20 @@ public class EventManager implements ActionListener {
             }
         }
         // ()
-        else if(event.getActionCommand().equals(buttons.get(5).getContent())){
-            if (quantity_par == 0) {
-                if (!expression.isEmpty()) {
-                    expression = expression + "x";
+        else if(event.getActionCommand().equals(buttons.get(5).getContent())) {
+            if(!expression.isEmpty() && math.canAdd(expression)){
+                if (quantity_par == 0) {
+                    expression = expression + "x(";
+                    quantity_par++;
+                } else if (expression.charAt(expression.length() - 1) == '(') {
+                    expression = expression + "(";
+                    quantity_par++;
+                } else {
+                    expression = expression + ")";
+                    quantity_par--;
                 }
-                expression = expression + "(";
-                quantity_par++;
-            } else if (expression.charAt(expression.length() - 1) == '(') {
-                expression = expression + "(";
-                quantity_par++;
             } else {
-                expression = expression + ")";
-                quantity_par--;
+                System.out.println("ERROR: entry invalidates");
             }
         }
         //8
