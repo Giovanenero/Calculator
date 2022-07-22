@@ -1,12 +1,11 @@
 package Calculator.ElementGraphic;
 
+import Calculator.Manager.EventManager;
 import Calculator.Manager.GraphicManager;
 import Calculator.Math.Math;
-import javax.swing.JFrame;
-import javax.swing.JButton;
+
+import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Button {
     private Math size;
@@ -15,9 +14,18 @@ public class Button {
     private JButton jButton;
     private boolean isNumber;
     private boolean isSpecial;
-    private static JFrame window = GraphicManager.getWindow();
+    private static JFrame window  = GraphicManager.getWindow();
+    private static EventManager eventManager = EventManager.getEventManager();
 
     public Button(String content, Math position, boolean isNumber, boolean isSpecial){
+        if(window == null){
+            System.out.println("ERROR: window is null");
+            System.exit(0);
+        }
+        if(eventManager == null){
+            System.out.println("ERROR: eventManager is null");
+            System.exit(0);
+        }
         this.content = content;
         this.isNumber = isNumber;
         this.isSpecial = isSpecial;
@@ -42,6 +50,8 @@ public class Button {
             jButton.setForeground(Color.ORANGE);
         }
         jButton.setBounds(position.x, position.y, size.x, size.y);
+        //eventManager vai tratar dos eventos
+        jButton.addActionListener(eventManager);
         window.add(jButton);
     }
 
@@ -55,5 +65,9 @@ public class Button {
 
     public JButton getButton(){
         return jButton;
+    }
+
+    public String getContent(){
+        return content;
     }
 }
