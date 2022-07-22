@@ -132,7 +132,6 @@ public class EventManager implements ActionListener {
         else if(event.getActionCommand().equals(buttons.get(19).getContent())){
             expression = math.result(expression);
         }
-        //System.out.println(number);
         System.out.println(expression);
     }
 }
