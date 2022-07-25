@@ -40,54 +40,40 @@ public class Math {
         return expression;
     }
     public String result(String expression){
-        /*
-        expression = removePoint(Calc(expression));
-        */
         if(!expression.contains("(")){
-            //terminar...
-        } else {
-            return returnNumber(expression, expression.indexOf("("));
+            return removePoint(Calc(expression));
         }
+        return removePoint(Calc(returnNumber(expression, expression.indexOf("("))));
+    }
+
+    private String calcPar(String expression){
         return expression;
     }
 
     private String returnNumber(String expression, int pos_ini){
-        String aux;
-        if(expression.charAt(pos_ini + 1) == '('){
-            aux = returnNumber(expression, pos_ini + 1);
-        } else {
-            String aux2 = "";
-            if(expression.indexOf("(", pos_ini + 1) == -1){
-                if(pos_ini == 0){
-                    return removePoint(Calc(expression.substring(pos_ini + 1, expression.lastIndexOf(")"))));
-                } else {
-                    aux = expression.substring(expression.indexOf(")") + 1);
-                    for(int i = 0; i < pos_ini; i++){
-                        aux2 += "(";
-                    }
-                    return aux2 + removePoint(Calc(expression.substring(pos_ini + 1, expression.indexOf(")")))) + aux;
-                }
+        int pos_end = expression.lastIndexOf("(");
+        if(pos_ini == pos_end){
+            if(pos_ini < expression.indexOf(")")) {
+                String aux = removePoint(Calc(expression.substring(pos_ini + 1, expression.indexOf(")"))));
+                expression = expression.substring(0, pos_ini) + aux + expression.substring(expression.indexOf(")") + 1);
+                return expression;
             } else {
-                int pos = expression.indexOf("(", pos_ini + 1);
-                int cont1 = pos_ini;
-                int cont2 = pos_ini;
-                if(pos_ini != )
-                for(int i = 0; i <= cont1; i++){
-                    aux2 += "(";
-                }
-                String aux3 = "";
-                for(int i = 0; i <= cont2; i++){
-                    aux3 += ")";
-                }
-                aux = aux2 + expression.substring(pos_ini, pos) + returnNumber(expression.substring(pos), 0) + aux3;
-                System.out.println(aux);
+                int aux2 = expression.indexOf(")", pos_ini + 1);
+                String aux = removePoint(Calc(expression.substring(pos_ini + 1, aux2)));
+                expression = expression.substring(0, pos_ini) + aux + expression.substring(aux2 + 1);
+                return expression;
+            }
+        } else {
+            if(expression.charAt(pos_ini + 1) == '('){
+                expression = returnNumber(expression, pos_ini + 1);
+            } else {
+                expression = returnNumber(expression, expression.indexOf("(", pos_ini + 1));
             }
         }
-        //System.out.println(aux);
-        if(aux.contains("(")){
-            return returnNumber(aux, 0);
+        if(expression.contains("(")){
+            return returnNumber(expression, 0);
         }
-        return aux;
+        return expression;
     }
 
     public boolean canAdd(String expression){
@@ -100,14 +86,11 @@ public class Math {
         return true;
     }
     private float returnNumber(String expression, int ini, int end){
-        String aux = expression.substring(ini, end);
-        return Float.parseFloat(aux);
+        return Float.parseFloat(expression.substring(ini, end));
     }
     private float Sum(String expression){
         int pos1 = expression.indexOf('+');
-        float num1 = returnNumber(expression, 0, pos1);
-        float num2 = returnNumber(expression, pos1 + 1, expression.length());
-        return num1 + num2;
+        return returnNumber(expression, 0, pos1) + returnNumber(expression, pos1 + 1, expression.length());
     }
     private float Subtraction(String expression){
         int pos1 = expression.indexOf('-');
