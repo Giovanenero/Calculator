@@ -1,6 +1,7 @@
 package Calculator.Manager;
 
 import Calculator.ElementGraphic.Button;
+import Calculator.ElementGraphic.Text;
 import Calculator.Math.Math;
 
 import javax.swing.*;
@@ -13,12 +14,13 @@ public class EventManager implements ActionListener {
 
     private static EventManager eventManager;
     private static List<Button> buttons;
+    private static List<Text> texts;
     private static JFrame window = GraphicManager.getWindow();
     private String expression = "";
     private Math math = new Math();
     private int quantity_par = 0;
-
     private EventManager(){
+        texts = GraphicManager.getTexts();
         buttons = GraphicManager.getButtons();
     }
 
@@ -154,11 +156,13 @@ public class EventManager implements ActionListener {
         // =
         else if(event.getActionCommand().equals(buttons.get(19).getContent())){
             expression = math.result(expression);
-        } else if(event.getActionCommand().equals(buttons.get(20).getContent())){
+        }
+        // A
+        else if(event.getActionCommand().equals(buttons.get(20).getContent())){
             if(!expression.isEmpty()) {
                 expression = expression.substring(0, expression.length() - 1);
             }
         }
-        System.out.println(expression);
+        texts.get(0).setText(expression);
     }
 }

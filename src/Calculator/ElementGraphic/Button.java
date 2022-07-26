@@ -55,8 +55,7 @@ public class Button {
             jButton.setForeground(Color.ORANGE);
         }
         jButton.setBounds(position.x, position.y, size.x, size.y);
-        //eventManager vai tratar dos eventos
-        jButton.addActionListener(eventManager);
+        jButton.addActionListener(eventManager); //eventManager vai tratar dos eventos
         jButton.setFont(font);
         window.add(jButton);
     }

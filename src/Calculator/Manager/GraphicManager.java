@@ -4,6 +4,7 @@ import Calculator.ElementGraphic.Button;
 import Calculator.ElementGraphic.Text;
 import Calculator.Math.Math;
 
+import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class GraphicManager {
     private static JFrame window;
     private Math display;
     private static List<Button> buttons;
-    private static List<Text> texts;
+    private static  List<Text> texts;
 
     public GraphicManager(){
         window = new JFrame();
@@ -26,10 +27,16 @@ public class GraphicManager {
             System.out.println("ERROR: buttons is null");
             System.exit(0);
         }
+        texts = new ArrayList<>();
+        if(texts == null){
+            System.out.println("ERROR: texts is null");
+            System.exit(0);
+        }
         display = new Math(25 + 80 * 4 + 25 + 15, 25 + 150 + 80 * 6 + 25);
         newWindow();
         newButtons();
         newJLabels();
+        window.update(window.getGraphics());
     }
 
     public static JFrame getWindow(){
@@ -39,7 +46,7 @@ public class GraphicManager {
     public static List<Button> getButtons() {
         return buttons;
     }
-    //public static List<Text> getTexts(){return texts;}
+    public static List<Text> getTexts(){ return texts; }
 
     public void newWindow(){
         window.setTitle("Calculator");
@@ -114,8 +121,10 @@ public class GraphicManager {
 
         Button b21 = new Button("A", new Math(ini_x + b1.getSize().x * 3, ini_y - b1.getSize().y * 1), false, true);
         buttons.add(b21);
+
     }
     private void newJLabels(){
-
+        Text t1 = new Text("0", new Math(display.x, 50), new Math(15, 15));
+        texts.add(t1);
     }
 }
