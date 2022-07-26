@@ -1,6 +1,7 @@
 package Calculator.Manager;
 
 import Calculator.ElementGraphic.Button;
+import Calculator.ElementGraphic.Text;
 import Calculator.Math.Math;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class GraphicManager {
     private static JFrame window;
     private Math display;
     private static List<Button> buttons;
+    private static List<Text> texts;
 
     public GraphicManager(){
         window = new JFrame();
@@ -27,6 +29,7 @@ public class GraphicManager {
         display = new Math(25 + 80 * 4 + 25 + 15, 25 + 150 + 80 * 6 + 25);
         newWindow();
         newButtons();
+        newJLabels();
     }
 
     public static JFrame getWindow(){
@@ -36,12 +39,14 @@ public class GraphicManager {
     public static List<Button> getButtons() {
         return buttons;
     }
+    //public static List<Text> getTexts(){return texts;}
 
     public void newWindow(){
         window.setTitle("Calculator");
         window.setSize(display.x, display.y);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLocationRelativeTo(null);
+        window.setLocationRelativeTo(null); //iniciar a janela no centro
+        window.setResizable(false); //não pode redimensionar a tela
         window.setVisible(true);
     }
     private void newButtons(){
@@ -109,5 +114,8 @@ public class GraphicManager {
 
         Button b21 = new Button("A", new Math(ini_x + b1.getSize().x * 3, ini_y - b1.getSize().y * 1), false, true);
         buttons.add(b21);
+    }
+    private void newJLabels(){
+
     }
 }

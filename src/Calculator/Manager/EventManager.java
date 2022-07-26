@@ -85,7 +85,6 @@ public class EventManager implements ActionListener {
             } else {
                 expression = expression + "(";
                 quantity_par++;
-                //System.out.println("ERROR: entry invalidates");
             }
         }
         //8
