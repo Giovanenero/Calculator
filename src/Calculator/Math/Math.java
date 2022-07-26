@@ -16,20 +16,20 @@ public class Math {
 
     private String Calc(String expression){
         if (expression.contains("+")) {
-            return Float.toString(Sum(expression));
+            return removePoint(Float.toString(Sum(expression)));
         } else if (expression.contains("-")) {
-            return Float.toString(Subtraction(expression));
+            return removePoint(Float.toString(Subtraction(expression)));
         } else if (expression.contains("x")) {
-            return Float.toString(Multiplication(expression));
+            return removePoint(Float.toString(Multiplication(expression)));
         } else if (expression.contains("/")) {
             float aux = Division(expression);
             if (aux == 0) {
                 return "";
             } else {
-                return Float.toString(aux);
+                return removePoint(Float.toString(aux));
             }
         } else {
-            return Float.toString(Percentage(expression));
+            return removePoint(Float.toString(Percentage(expression)));
         }
     }
     private String removePoint(String expression){
@@ -41,28 +41,27 @@ public class Math {
     }
     public String result(String expression){
         if(!expression.contains("(")){
-            return removePoint(Calc(expression));
+            return Calc(expression);
+        } else {
+            String aux = returnNumber(expression, expression.indexOf("("));
+            if(aux.contains("+") || aux.contains("-") || aux.contains("x") || aux.contains("/") || aux.contains("%")){
+                return Calc(aux);
+            }
+            return aux;
         }
-        return removePoint(Calc(returnNumber(expression, expression.indexOf("("))));
-    }
-
-    private String calcPar(String expression){
-        return expression;
     }
 
     private String returnNumber(String expression, int pos_ini){
         int pos_end = expression.lastIndexOf("(");
         if(pos_ini == pos_end){
+            String aux;
             if(pos_ini < expression.indexOf(")")) {
-                String aux = removePoint(Calc(expression.substring(pos_ini + 1, expression.indexOf(")"))));
-                expression = expression.substring(0, pos_ini) + aux + expression.substring(expression.indexOf(")") + 1);
-                return expression;
-            } else {
-                int aux2 = expression.indexOf(")", pos_ini + 1);
-                String aux = removePoint(Calc(expression.substring(pos_ini + 1, aux2)));
-                expression = expression.substring(0, pos_ini) + aux + expression.substring(aux2 + 1);
-                return expression;
+                aux = Calc(expression.substring(pos_ini + 1, expression.indexOf(")")));
+                return expression.substring(0, pos_ini) + aux + expression.substring(expression.indexOf(")") + 1);
             }
+            int aux2 = expression.indexOf(")", pos_ini + 1);
+            aux = Calc(expression.substring(pos_ini + 1, aux2));
+            return expression.substring(0, pos_ini) + aux + expression.substring(aux2 + 1);
         } else {
             if(expression.charAt(pos_ini + 1) == '('){
                 expression = returnNumber(expression, pos_ini + 1);
