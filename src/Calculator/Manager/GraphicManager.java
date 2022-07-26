@@ -32,7 +32,7 @@ public class GraphicManager {
             System.out.println("ERROR: texts is null");
             System.exit(0);
         }
-        display = new Math(25 + 80 * 4 + 25 + 15, 25 + 150 + 80 * 6 + 25);
+        display = new Math(80 * 4 + 20, 10 + 150 + 80 * 6);
         newWindow();
         newButtons();
         newJLabels();
@@ -57,7 +57,7 @@ public class GraphicManager {
         window.setVisible(true);
     }
     private void newButtons(){
-        short ini_x = 25, ini_y = 200;
+        short ini_x = 2, ini_y = 200;
 
         Button b1 = new Button("C", new Math(ini_x, ini_y), false, true);
         buttons.add(b1);

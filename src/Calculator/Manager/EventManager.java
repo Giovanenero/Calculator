@@ -108,7 +108,8 @@ public class EventManager implements ActionListener {
         // %
         else if(event.getActionCommand().equals(buttons.get(10).getContent())){
             if (math.canAdd(expression)){
-                expression = expression + "%";
+                expression = expression + "%(";
+                quantity_par++;
             }
         }
         // 9
@@ -132,13 +133,15 @@ public class EventManager implements ActionListener {
         // /
         else if(event.getActionCommand().equals(buttons.get(15).getContent())){
             if(math.canAdd(expression)){
-                expression = expression + "/";
+                expression = expression + "/(";
+                quantity_par++;
             }
         }
         // x
         else if(event.getActionCommand().equals(buttons.get(16).getContent())){
             if(math.canAdd(expression)){
-                expression = expression + "x";
+                expression = expression + "x(";
+                quantity_par++;
             }
         }
         // -
