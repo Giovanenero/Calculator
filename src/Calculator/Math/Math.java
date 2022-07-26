@@ -16,7 +16,10 @@ public class Math {
 
     private boolean verification(String expression, int i){
         if(expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == 'x' || expression.charAt(i) == '/' || expression.charAt(i) == '%'){
-            return true;
+            if(expression.charAt(i - 1) != 'x' && expression.charAt(i - 1) != '/' && expression.charAt(i - 1) != '%'){
+                return true;
+            }
+            return false;
         }
         return false;
     }
@@ -27,6 +30,7 @@ public class Math {
         return false;
     }
     private String CalcDiv(String expression){
+        //System.out.println("aqui " + expression);
         int j = 0;
         int i;
         for(i = 1; i < expression.length() && j < 2; i++){
@@ -93,9 +97,9 @@ public class Math {
                 aux = CalcDiv(expression.substring(pos_ini + 1, expression.indexOf(")")));
                 return expression.substring(0, pos_ini) + aux + expression.substring(expression.indexOf(")") + 1);
             }
-            int aux2 = expression.indexOf(")", pos_ini + 1);
-            aux = CalcDiv(expression.substring(pos_ini + 1, aux2));
-            return expression.substring(0, pos_ini) + aux + expression.substring(aux2 + 1);
+            //int aux2 = expression.indexOf(")", pos_ini + 1);
+            aux = CalcDiv(expression.substring(pos_ini + 1, expression.indexOf(")", pos_ini + 1)));
+            return expression.substring(0, pos_ini) + aux + expression.substring(expression.indexOf(")", pos_ini + 1) + 1);
         } else {
             if(expression.charAt(pos_ini + 1) == '('){
                 expression = returnNumber(expression, pos_ini + 1);
@@ -103,7 +107,7 @@ public class Math {
                 expression = returnNumber(expression, expression.indexOf("(", pos_ini + 1));
             }
         }
-        if(expression.contains("(")){
+        if(expression.contains("(") && !expression.contains("x(-")){
             return returnNumber(expression, 0);
         }
         return expression;

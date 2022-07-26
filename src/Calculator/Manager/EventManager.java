@@ -47,8 +47,6 @@ public class EventManager implements ActionListener {
         }
         // +/-
         else if(event.getActionCommand().equals(buttons.get(4).getContent())){
-            String ant = "";
-            String next = "";
             if(!expression.isEmpty()) {
                 if(expression.length() == 1){
                     expression = "-" + expression;
@@ -70,16 +68,6 @@ public class EventManager implements ActionListener {
                 expression = "(-";
                 quantity_par++;
             }
-
-
-            /*
-            if(expression.charAt(expression.length() - 1) != '-') {
-                expression = ant + "-" + next;
-                System.out.println(expression);
-            } else  {
-                expression = expression.substring(1, expression.length());
-            }
-            */
         }
         // ()
         else if(event.getActionCommand().equals(buttons.get(5).getContent())) {
