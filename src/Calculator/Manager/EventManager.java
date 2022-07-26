@@ -47,12 +47,31 @@ public class EventManager implements ActionListener {
         }
         // +/-
         else if(event.getActionCommand().equals(buttons.get(4).getContent())){
-            /*
-            if(expression.charAt(expression.length() - 1) == '+') {
-                String ant = expression.substring(0, expression.length() - 2);
-                String next = expression.substring(expression.length() - 1);
+            String ant = "";
+            String next = "";
+            if(!expression.isEmpty()) {
+                if(expression.length() == 1){
+                    expression = "-" + expression;
+                }
+                else if (expression.charAt(expression.length() - 2) == '-'){
+                    if(expression.length() == 2){
+                        expression = expression.substring(expression.length() - 1);
+                    } else {
+                        expression = expression.substring(0, expression.length() - 2) + "+" + expression.substring(expression.length() - 1);
+                    }
+                } else if(expression.charAt(expression.length() - 2) == '+'){
+                    if(expression.length() == 2){
+                        expression = expression.substring(expression.length() - 1);
+                    } else {
+                        expression = expression.substring(0, expression.length() - 2) + "-" + expression.substring(expression.length() - 1);
+                    }
+                }
+            } else {
+                expression = "(-";
+                quantity_par++;
             }
-             */
+
+
             /*
             if(expression.charAt(expression.length() - 1) != '-') {
                 expression = ant + "-" + next;
