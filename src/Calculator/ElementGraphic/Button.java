@@ -12,6 +12,7 @@ public class Button {
     private Math position;
     private String content;
     private JButton jButton;
+    private Font font = new Font("Courier New", Font.BOLD, 20);
     private boolean isNumber;
     private boolean isSpecial;
     private static JFrame window  = GraphicManager.getWindow();
@@ -26,10 +27,14 @@ public class Button {
             System.out.println("ERROR: eventManager is null");
             System.exit(0);
         }
+        if(font == null){
+            System.out.println("ERROR: font is null");
+            System.exit(0);
+        }
         this.content = content;
         this.isNumber = isNumber;
         this.isSpecial = isSpecial;
-        size = new Math(50, 50);
+        size = new Math(80, 80);
         this.position = position;
         jButton = new JButton(content);
         if(jButton == null){
@@ -52,6 +57,7 @@ public class Button {
         jButton.setBounds(position.x, position.y, size.x, size.y);
         //eventManager vai tratar dos eventos
         jButton.addActionListener(eventManager);
+        jButton.setFont(font);
         window.add(jButton);
     }
 

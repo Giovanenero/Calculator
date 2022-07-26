@@ -24,7 +24,7 @@ public class GraphicManager {
             System.out.println("ERROR: buttons is null");
             System.exit(0);
         }
-        display = new Math(265, 450);
+        display = new Math(25 + 80 * 4 + 25 + 15, 25 + 150 + 80 * 6 + 25);
         newWindow();
         newButtons();
     }
@@ -45,7 +45,7 @@ public class GraphicManager {
         window.setVisible(true);
     }
     private void newButtons(){
-        short ini_x = 25, ini_y = 150;
+        short ini_x = 25, ini_y = 200;
 
         Button b1 = new Button("C", new Math(ini_x, ini_y), false, true);
         buttons.add(b1);
@@ -106,5 +106,8 @@ public class GraphicManager {
 
         Button b20 = new Button("=", new Math(ini_x + b1.getSize().x * 3, ini_y + b1.getSize().y * 4), false, true);
         buttons.add(b20);
+
+        Button b21 = new Button("A", new Math(ini_x + b1.getSize().x * 3, ini_y - b1.getSize().y * 1), false, true);
+        buttons.add(b21);
     }
 }

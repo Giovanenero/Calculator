@@ -155,6 +155,10 @@ public class EventManager implements ActionListener {
         // =
         else if(event.getActionCommand().equals(buttons.get(19).getContent())){
             expression = math.result(expression);
+        } else if(event.getActionCommand().equals(buttons.get(20).getContent())){
+            if(!expression.isEmpty()) {
+                expression = expression.substring(0, expression.length() - 1);
+            }
         }
         System.out.println(expression);
     }

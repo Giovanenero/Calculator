@@ -30,7 +30,6 @@ public class Math {
         return false;
     }
     private String CalcDiv(String expression){
-        //System.out.println("aqui " + expression);
         int j = 0;
         int i;
         for(i = 1; i < expression.length() && j < 2; i++){
@@ -107,7 +106,7 @@ public class Math {
                 expression = returnNumber(expression, expression.indexOf("(", pos_ini + 1));
             }
         }
-        if(expression.contains("(") && !expression.contains("x(-")){
+        if(expression.contains("(")){
             return returnNumber(expression, 0);
         }
         return expression;
