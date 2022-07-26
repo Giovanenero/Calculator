@@ -14,11 +14,43 @@ public class Math {
 
     }
 
+    private boolean verification(String expression, int i){
+        if(expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == 'x' || expression.charAt(i) == '/' || expression.charAt(i) == '%'){
+            return true;
+        }
+        return false;
+    }
+    private boolean verification(String expression){
+        if(expression.contains("+") || expression.contains("-") || expression.contains("x") || expression.contains("/") || expression.contains("%")){
+            return true;
+        }
+        return false;
+    }
+    private String CalcDiv(String expression){
+        int j = 0;
+        int i;
+        for(i = 1; i < expression.length() && j < 2; i++){
+            if(verification(expression, i)){
+                j++;
+            }
+        }
+        String aux;
+        if(j == 2){
+            aux = expression.substring(0, i - 1);
+            aux = Calc(aux);
+            expression = aux + expression.substring(i - 1);
+            if(verification(expression)){
+                return CalcDiv(expression);
+            }
+        } else if(j == 1){
+            return Calc(expression);
+        }
+        return expression;
+    }
+
     private String Calc(String expression){
         if (expression.contains("+")) {
             return removePoint(Float.toString(Sum(expression)));
-        } else if (expression.contains("-")) {
-            return removePoint(Float.toString(Subtraction(expression)));
         } else if (expression.contains("x")) {
             return removePoint(Float.toString(Multiplication(expression)));
         } else if (expression.contains("/")) {
@@ -28,8 +60,10 @@ public class Math {
             } else {
                 return removePoint(Float.toString(aux));
             }
-        } else {
+        } else if(expression.contains("%")) {
             return removePoint(Float.toString(Percentage(expression)));
+        } else {
+            return removePoint(Float.toString(Subtraction(expression)));
         }
     }
     private String removePoint(String expression){
@@ -41,11 +75,11 @@ public class Math {
     }
     public String result(String expression){
         if(!expression.contains("(")){
-            return Calc(expression);
+            return CalcDiv(expression);
         } else {
             String aux = returnNumber(expression, expression.indexOf("("));
             if(aux.contains("+") || aux.contains("-") || aux.contains("x") || aux.contains("/") || aux.contains("%")){
-                return Calc(aux);
+                return CalcDiv(aux);
             }
             return aux;
         }
@@ -56,11 +90,11 @@ public class Math {
         if(pos_ini == pos_end){
             String aux;
             if(pos_ini < expression.indexOf(")")) {
-                aux = Calc(expression.substring(pos_ini + 1, expression.indexOf(")")));
+                aux = CalcDiv(expression.substring(pos_ini + 1, expression.indexOf(")")));
                 return expression.substring(0, pos_ini) + aux + expression.substring(expression.indexOf(")") + 1);
             }
             int aux2 = expression.indexOf(")", pos_ini + 1);
-            aux = Calc(expression.substring(pos_ini + 1, aux2));
+            aux = CalcDiv(expression.substring(pos_ini + 1, aux2));
             return expression.substring(0, pos_ini) + aux + expression.substring(aux2 + 1);
         } else {
             if(expression.charAt(pos_ini + 1) == '('){
@@ -89,19 +123,24 @@ public class Math {
     }
     private float Sum(String expression){
         int pos1 = expression.indexOf('+');
-        return returnNumber(expression, 0, pos1) + returnNumber(expression, pos1 + 1, expression.length());
+        return returnNumber(expression,0, pos1) + returnNumber(expression, pos1 + 1, expression.length());
     }
     private float Subtraction(String expression){
-        int pos1 = expression.indexOf('-');
-        float num1 = returnNumber(expression, 0, pos1);
-        float num2 = returnNumber(expression, pos1 + 1, expression.length());
+        int pos1 = expression.indexOf("-");
+        int pos2 = expression.indexOf("-", pos1 + 1);
+        float num1, num2;
+        if(pos2 != -1){
+            num1 = returnNumber(expression, 0, pos2);
+            num2 = returnNumber(expression, pos2 + 1, expression.length());
+        } else {
+            num1 = returnNumber(expression, 0, pos1);
+            num2 = returnNumber(expression, pos1 + 1, expression.length());
+        }
         return num1 - num2;
     }
     private float Multiplication(String expression){
-        int pos1 = expression.indexOf('x');
-        float num1 = returnNumber(expression, 0, pos1);
-        float num2 = returnNumber(expression, pos1 + 1, expression.length());
-        return num1 * num2;
+        int pos1 = expression.indexOf("x");
+        return returnNumber(expression, 0, pos1) * returnNumber(expression, pos1 + 1, expression.length());
     }
 
     private float Division(String expression){
@@ -116,8 +155,6 @@ public class Math {
     }
     private float Percentage(String expression){
         int pos1 = expression.indexOf("%");
-        float num1 = returnNumber(expression, 0, pos1);
-        float num2 = returnNumber(expression, pos1 + 1, expression.length());
-        return num1 * (num2/100);
+        return returnNumber(expression, 0, pos1) * (returnNumber(expression, pos1 + 1, expression.length())/100);
     }
 }
