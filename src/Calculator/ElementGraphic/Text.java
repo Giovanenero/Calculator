@@ -1,45 +1,40 @@
 package Calculator.ElementGraphic;
 
 import Calculator.Manager.GraphicManager;
+import Calculator.Math.Coord;
 import Calculator.Math.Math;
 import javax.swing.*;
 import java.awt.*;
 
-public class Text {
+public class Text extends ElementGraphic{
     private JLabel jLabel;
-    private Font font = new Font("Courier New", Font.BOLD, 20);
-    private JFrame window = GraphicManager.getWindow();
-    private Math size;
-    private Math position;
-    private String text;
+    private Coord size;
 
-    public Text(String text, Math size, Math position){
-        if(window == null){
-            System.out.println("ERROR: window is null");
-            System.exit(0);
-        }
+    public Text(String content, Coord size, Coord position){
+        super(content, position);
         this.size = size;
-        this.position = position;
-        this.text = text;
         startup();
     }
     private void startup(){
-        jLabel = new JLabel(text);
+        jLabel = new JLabel(content);
         if(jLabel == null){
             System.out.println("ERROR: jLabel is null");
             System.exit(0);
         }
         jLabel.setFont(font);
         jLabel.setBounds(position.x, position.y, size.x, size.y);
-        window.add(jLabel);
     }
 
-    public void setText(String text){
-        this.text = text;
-        jLabel.setText(text);
+    public void setText(String content){
+        this.content = content;
+        jLabel.setText(content);
     }
     public String getText(){
-        return text;
+        return content;
+    }
+
+    public JLabel getJLabel(){
+        return jLabel;
     }
     public void print(){
         jLabel.setBounds(position.x, position.y, size.x, size.y);

@@ -12,21 +12,20 @@ import java.util.List;
 //Singleton
 public class EventManager implements ActionListener {
 
-    private static EventManager eventManager;
-    private static List<Button> buttons;
-    private static List<Text> texts;
-    private static JFrame window = GraphicManager.getWindow();
+    private static List<Button> buttons = GraphicManager.getButtons();
+    private static List<Text> texts = GraphicManager.getTexts();
     private String expression = "";
     private Math math = new Math();
     private int quantity_par = 0;
-    private EventManager(){
-        texts = GraphicManager.getTexts();
-        buttons = GraphicManager.getButtons();
-    }
 
-    public static EventManager getEventManager() {
-        return (eventManager == null) ? new EventManager() : eventManager;
+    private static EventManager eventManager = null;
+    public static EventManager getEventManager(){
+        if(eventManager == null){
+            eventManager = new EventManager();
+        }
+        return eventManager;
     }
+    private EventManager() { }
 
     @Override
     public void actionPerformed(ActionEvent event){
