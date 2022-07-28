@@ -8,6 +8,6 @@ Este projeto foi implementado em Java - utilizando as classes JFrame, JLabel e o
 
 # Anexo
 
-É fazível aprimorar ainda mais o designer do projeto e adicionar mais símbolos matemáticos, mas este não foi o foco neste momento, apenas a manipulação de strings, conceito de herança e a lógica das expressões matemáticas.  
+É fazível aprimorar ainda mais o designer do projeto e adicionar mais símbolos matemáticos, mas este não foi o foco neste momento, apenas a manipulação de strings, conceito de herança, recursividade, padrão de projeto singleton - utilizada no EventManager - e a lógica para as expressões matemáticas.  
  
 ![Mobile 2](https://github.com/Giovanenero/Calculator/blob/main/DiagramaUML/Calc.png)
