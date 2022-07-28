@@ -9,7 +9,6 @@ import java.util.List;
 public class ButtonList extends Calculator.ElementGraphic.List.List {
     private static List<Button> buttons = GraphicManager.getButtons();
 
-    //create
     public ButtonList(){
         super();
         createButtons();
@@ -87,8 +86,5 @@ public class ButtonList extends Calculator.ElementGraphic.List.List {
             window.add(buttons.get(i).getButton());
             buttons.get(i).getButton().addActionListener(eventManager);
         }
-    }
-    public static List<Button> getButtons(){
-        return buttons;
     }
 }

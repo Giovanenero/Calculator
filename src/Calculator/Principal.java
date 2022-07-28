@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Principal {
     private static List<Text> texts = GraphicManager.getTexts();
+    private static GraphicManager graphicManager = new GraphicManager();
     public Principal(){
-        new GraphicManager();
         while(true){
             texts.get(0).print();
         }

@@ -1,8 +1,10 @@
 package Calculator.Math;
 
-import com.sun.tools.javac.Main;
-
 public class Math {
+
+    public Math(){
+
+    }
 
     private boolean verification(String expression, int i){
         if(expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == 'x' || expression.charAt(i) == '/' || expression.charAt(i) == '%'){

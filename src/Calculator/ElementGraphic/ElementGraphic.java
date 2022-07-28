@@ -16,4 +16,7 @@ public class ElementGraphic {
         this.content = content;
         this.position = position;
     }
+    public String getContent(){
+        return content;
+    }
 }

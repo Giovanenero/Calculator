@@ -43,8 +43,4 @@ public class Button extends ElementGraphic{
     public JButton getButton(){
         return jButton;
     }
-
-    public String getContent(){
-        return content;
-    }
 }

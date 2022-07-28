@@ -29,9 +29,6 @@ public class Text extends ElementGraphic{
         this.content = content;
         jLabel.setText(content);
     }
-    public String getText(){
-        return content;
-    }
 
     public JLabel getJLabel(){
         return jLabel;

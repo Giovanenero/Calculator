@@ -5,9 +5,7 @@ import Calculator.ElementGraphic.List.ButtonList;
 import Calculator.ElementGraphic.List.TextList;
 import Calculator.ElementGraphic.Text;
 import Calculator.Math.Coord;
-import Calculator.Math.Math;
 
-import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -36,7 +34,7 @@ public class GraphicManager {
         return window;
     }
 
-    public void newWindow(){
+    private void newWindow(){
         window = new JFrame();
         if(window == null){
             System.out.println("ERROR: window is null");
